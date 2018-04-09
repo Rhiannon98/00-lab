@@ -7,8 +7,8 @@ var container = document.getElementById('image_container');
 var viewed = [];
 var labels = [];
 var pics = [document.getElementById('left'),
-                document.getElementById('center'), //eslint-disable-line
-                document.getElementById('right')]; //eslint-disable-line
+document.getElementById('center'), //eslint-disable-line
+document.getElementById('right')]; //eslint-disable-line
 var list = document.getElementById('productlist');
 var totalClicks = 0;
 var views = [];
@@ -26,21 +26,21 @@ function makeRandom() {
   return Math.floor(Math.random() * names.length);
 }
 
-function displayPics(){
+function displayPics() {
   // roll for three random indexes
-  while(viewed.length < 6){
-    var rando = makeRandom();
-    while(!viewed.includes(rando)){
+  while (viewed.length < 6) {
+    let rando = makeRandom();
+    while (!viewed.includes(rando)) {
       viewed.push(rando);
     }
   }
   console.log(rando);
   // TODO: In a sentence or two, explain why the previous line of code threw an error when we changed the variable declaration from `var to `let`.
-  // PUT YOUR RESPONSE IN THIS COMMENT
-  console.log(viewed)
+  // The reason why we are getting an error when we change var to let is because of scope. When we had the variable as var, we still had the ability of calling that variable outside of the function (somehow). However, now that we have it changed to let we encounter the issue that the scope is only within the block/function itself.
+  console.log(viewed);
 
   // To the DOM and beyond!
-  for (var i = 0; i < 3; i++){
+  for (var i = 0; i < 3; i++) {
     var temp = viewed.shift();
     pics[i].src = allProducts[temp].path;
     pics[i].id = allProducts[temp].name;
@@ -49,7 +49,7 @@ function displayPics(){
 }
 
 function handleClick(event) {
-  if(totalClicks > 24) {
+  if (totalClicks > 24) {
     container.removeEventListener('click', handleClick);
     container.style.display = 'none';
     showList();
@@ -59,8 +59,8 @@ function handleClick(event) {
     return alert('Be sure to click directly on an image!!');
   }
   totalClicks += 1;
-  for(var i = 0; i < names.length; i++){
-    if(event.target.id === allProducts[i].name) {
+  for (var i = 0; i < names.length; i++) {
+    if (event.target.id === allProducts[i].name) {
       allProducts[i].votes += 1;
       console.log(event.target.id + ' has ' + allProducts[i].votes + ' votes in ' + allProducts[i].views + ' views');
     }
@@ -71,22 +71,22 @@ function handleClick(event) {
 }
 
 function showList() {
-  for(var i = 0; i < allProducts.length; i++) {
+  for (var i = 0; i < allProducts.length; i++) {
     var liEl = document.createElement('li');
     liEl.textContent = allProducts[i].name + ' has ' + allProducts[i].votes + ' votes in ' + allProducts[i].views + ' views';
     list.appendChild(liEl);
   }
 }
 
-function makeChartData(){
-  allProducts.forEach(function(product){
+function makeChartData() {
+  allProducts.forEach(function (product) {
     labels.push(product.name);
     votes.push(product.votes);
     views.push(product.views);
   });
 }
 
-function makeChart(){
+function makeChart() {
   makeChartData();
   var ctx = document.getElementById('chartypants').getContext('2d');
   new Chart(ctx, {
@@ -118,17 +118,17 @@ function makeChart(){
 
 container.addEventListener('click', handleClick);
 
-document.getElementById('bus').addEventListener('click', function(){
+document.getElementById('bus').addEventListener('click', function () {
   localStorage.removeItem('busmall');
   console.log('Local storage was cleared!');
 });
 
-if(localStorage.busmall){
+if (localStorage.busmall) {
   console.log('Local storage data exists');
-  allProducts = JSON.parse(localStorage.busmall)
+  allProducts = JSON.parse(localStorage.busmall);
 } else {
   console.log('There is no local storage data; initialize app by creating instances');
-  for(var i = 0; i < names.length; i++) {
+  for (var i = 0; i < names.length; i++) {
     new Product(names[i]);
   }
   console.log(allProducts);
