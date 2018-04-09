@@ -22,10 +22,12 @@ Follow these instructions carefully and in order.
 
 ##### Investigate how `let` and `const` are now used in the code. Where did you need to convert `const` into `let` to make the code work? Can you identify any patterns/similarities?
 
-(Put your answer here)
+(My answer here)
 
----
+Wherever there was an instance of any type of loop with the variable `i` there had to be a `let` stated. `i` in this case is changing in order for the loop to run properly, therefore using a `const` would provide an error. Some of the global variables that were either arrays being filled or being redefined or added to needed to be changed to `let` as well. I always had the ability of changing every variable to a `let` and the code still being able to function just the same. 
 
 ##### How did it go with making the adaptation from concatenations to template literal notation? Do you think you'll mostly use template literal notation from now on?
 
-(Put your answer here)
+(My answer here)
+
+Honestly, the template literal notation makes more sense to my head to read everything. It formats it as though we are implementing tools from a word document. Not having to add awkward breaks to have a new line start is pretty great. Also, looking back now at the 201 work seems like a long road into the same effect if I were to use jQuery. So knowing that this was always an option is honestly really aggrevating thanks to all the headaches JavaScript caused me and my fellow peers.
